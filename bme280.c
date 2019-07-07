@@ -645,8 +645,9 @@ int8_t bme280_soft_reset(const struct bme280_dev *dev)
         /* Write the soft reset command in the sensor */
         rslt = bme280_set_regs(&reg_addr, &soft_rst_cmd, 1, dev);
 
-        /* As per data sheet, startup time is 2 ms. */
-        dev->delay_ms(2);
+        /* As per data sheet,. startup time is 2 ms. However, in some cases
+         * this is not enough */
+        dev->delay_ms(12);
     }
 
     return rslt;
